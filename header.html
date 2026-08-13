@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alberto | Full-Stack Developer</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+    color: #ffffff;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+  }
+  
+  /* Animated gradient orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    animation: float 20s ease-in-out infinite;
+    z-index: 1;
+  }
+  
+  .orb1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #00fff7, transparent);
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+  }
+  
+  .orb2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #ff00ff, transparent);
+    bottom: -150px;
+    right: -150px;
+    animation-delay: 5s;
+  }
+  
+  .orb3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #7000ff, transparent);
+    top: 50%;
+    right: 10%;
+    animation-delay: 10s;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(50px, -50px) scale(1.1); }
+    66% { transform: translate(-30px, 30px) scale(0.9); }
+  }
+  
+  /* Animated grid with perspective */
+  .grid {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(0, 255, 247, 0.03) 2px, transparent 2px),
+      linear-gradient(90deg, rgba(0, 255, 247, 0.03) 2px, transparent 2px);
+    background-size: 60px 60px;
+    transform: perspective(600px) rotateX(60deg);
+    transform-origin: center center;
+    animation: gridPulse 8s ease-in-out infinite;
+    z-index: 2;
+  }
+  
+  @keyframes gridPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+  
+  /* Floating particles with trails */
+  .particle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: #00fff7;
+    border-radius: 50%;
+    box-shadow: 
+      0 0 10px #00fff7,
+      0 0 20px #00fff7,
+      0 0 30px rgba(0, 255, 247, 0.5);
+    animation: particleFloat 12s infinite ease-in-out;
+    z-index: 3;
+  }
+  
+  @keyframes particleFloat {
+    0%, 100% { 
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { 
+      transform: translate(var(--tx), var(--ty));
+      opacity: 0;
+    }
+  }
+  
+  /* Main container with glass effect */
+  .container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 60px 40px;
+    max-width: 1100px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: containerFloat 6s ease-in-out infinite;
+  }
+  
+  @keyframes containerFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  /* Glowing name with smooth gradient */
+  .name {
+    font-size: clamp(2.5em, 7vw, 5.5em);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin-bottom: 15px;
+    position: relative;
+    display: block;
+    background: linear-gradient(120deg, #00fff7 0%, #ff00ff 50%, #7000ff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbowShift 4s ease infinite;
+    filter: drop-shadow(0 0 30px rgba(0, 255, 247, 0.5));
+  }
+  
+  @keyframes rainbowShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Smooth wave emoji */
+  .wave {
+    display: inline-block;
+    animation: wave 2.5s ease-in-out infinite;
+    transform-origin: 70% 70%;
+    font-size: 0.9em;
+    filter: none;
+    -webkit-text-fill-color: initial;
+    background: none;
+  }
+  
+  @keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(14deg); }
+    20%, 40% { transform: rotate(-8deg); }
+    50% { transform: rotate(0deg); }
+  }
+  
+  /* Tagline with fade-in */
+  .tagline {
+    font-size: clamp(1.2em, 2.5vw, 1.8em);
+    color: #c0c0c0;
+    margin-bottom: 25px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    animation: fadeInUp 1.5s ease;
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Elegant divider */
+  .divider {
+    width: 150px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #00fff7, #ff00ff, transparent);
+    margin: 35px auto;
+    border-radius: 10px;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.5; transform: scaleX(1); }
+    50% { opacity: 1; transform: scaleX(1.2); }
+  }
+  
+  /* Welcome message with glow */
+  .welcome {
+    font-size: clamp(1.3em, 2.2vw, 1.6em);
+    color: #00fff7;
+    margin-bottom: 35px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    animation: fadeIn 2s ease;
+    text-shadow: 0 0 20px rgba(0, 255, 247, 0.5);
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Badge container */
+  .badges {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  
+  /* Elegant status badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, rgba(0, 255, 247, 0.15), rgba(0, 255, 247, 0.05));
+    border: 2px solid rgba(0, 255, 247, 0.5);
+    border-radius: 50px;
+    font-size: clamp(0.85em, 1.5vw, 1em);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+    box-shadow: 0 4px 15px rgba(0, 255, 247, 0.2);
+  }
+  
+  .badge::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #00fff7;
+    border-radius: 50%;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 15px #00fff7;
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes badgePulse {
+    0%, 100% { 
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+    50% { 
+      opacity: 0.4;
+      transform: translateY(-50%) scale(1.3);
+    }
+  }
+  
+  .badge:hover {
+    background: linear-gradient(135deg, rgba(0, 255, 247, 0.25), rgba(0, 255, 247, 0.1));
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(0, 255, 247, 0.4);
+    border-color: #00fff7;
+  }
+  
+  /* Excellence badge - auto highlight animation */
+  .excellence {
+    animation: autoHighlight 6s ease-in-out infinite;
+  }
+  
+  @keyframes autoHighlight {
+    0%, 50%, 100% {
+      background: linear-gradient(135deg, rgba(0, 255, 247, 0.15), rgba(0, 255, 247, 0.05));
+      transform: translateY(0) scale(1);
+      box-shadow: 0 4px 15px rgba(0, 255, 247, 0.2);
+      border-color: rgba(0, 255, 247, 0.5);
+    }
+    55%, 95% {
+      background: linear-gradient(135deg, rgba(0, 255, 247, 0.25), rgba(0, 255, 247, 0.1));
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 255, 247, 0.4);
+      border-color: #00fff7;
+    }
+  }
+  
+  /* Mouse pointer indicator */
+  .pointer {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 100;
+    animation: pointerMove 6s ease-in-out infinite;
+  }
+  
+  @keyframes pointerMove {
+    0%, 48%, 100% {
+      opacity: 0;
+      transform: translate(-50px, -50px) scale(0.5);
+    }
+    50%, 52% {
+      opacity: 1;
+      transform: translate(-50px, -50px) scale(1);
+    }
+    54%, 96% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
+    }
+    98% {
+      opacity: 0;
+      transform: translate(0, 0) scale(0.5);
+    }
+  }
+  
+  /* Commission badge - special purple theme */
+  .commission {
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.15), rgba(120, 0, 255, 0.05));
+    border-color: rgba(255, 0, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(255, 0, 255, 0.2);
+  }
+  
+  .commission::before {
+    background: #ff00ff;
+    box-shadow: 0 0 15px #ff00ff;
+    animation: commissionPulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes commissionPulse {
+    0%, 100% { 
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+    50% { 
+      opacity: 0.4;
+      transform: translateY(-50%) scale(1.3);
+    }
+  }
+  
+  .commission:hover {
+    background: linear-gradient(135deg, rgba(255, 0, 255, 0.25), rgba(120, 0, 255, 0.1));
+    box-shadow: 0 8px 30px rgba(255, 0, 255, 0.4);
+    border-color: #ff00ff;
+  }
+  
+  /* Stars background */
+  .star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite;
+    z-index: 1;
+  }
+  
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+      padding: 40px 25px;
+      border-radius: 20px;
+    }
+    
+    .badges {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .badge {
+      width: 100%;
+      max-width: 320px;
+      justify-content: center;
+    }
+    
+    .orb { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- Gradient orbs -->
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  
+  <!-- Grid background -->
+  <div class="grid"></div>
+  
+  <!-- Stars -->
+  <div class="star" style="left: 10%; top: 15%; animation-delay: 0s;"></div>
+  <div class="star" style="left: 25%; top: 35%; animation-delay: 1s;"></div>
+  <div class="star" style="left: 45%; top: 20%; animation-delay: 2s;"></div>
+  <div class="star" style="left: 65%; top: 45%; animation-delay: 1.5s;"></div>
+  <div class="star" style="left: 80%; top: 25%; animation-delay: 0.5s;"></div>
+  <div class="star" style="left: 90%; top: 60%; animation-delay: 2.5s;"></div>
+  <div class="star" style="left: 15%; top: 70%; animation-delay: 3s;"></div>
+  <div class="star" style="left: 55%; top: 75%; animation-delay: 1.8s;"></div>
+  
+  <!-- Floating particles -->
+  <div class="particle" style="left: 15%; top: 25%; --tx: 150px; --ty: -400px; animation-delay: 0s;"></div>
+  <div class="particle" style="left: 35%; top: 55%; --tx: -120px; --ty: -500px; animation-delay: 3s;"></div>
+  <div class="particle" style="left: 55%; top: 35%; --tx: 180px; --ty: -450px; animation-delay: 6s;"></div>
+  <div class="particle" style="left: 75%; top: 65%; --tx: -100px; --ty: -550px; animation-delay: 2s;"></div>
+  <div class="particle" style="left: 85%; top: 30%; --tx: 130px; --ty: -480px; animation-delay: 4s;"></div>
+  <div class="particle" style="left: 25%; top: 75%; --tx: 160px; --ty: -520px; animation-delay: 8s;"></div>
+  
+  <!-- Main content -->
+  <div class="container">
+    <h1 class="name">Hi, I'm Alberto <span class="wave">👋</span></h1>
+    <p class="tagline">Full-Stack Developer</p>
+    
+    <div class="divider"></div>
+    
+    <p class="welcome">Welcome to my GitHub!</p>
+    
+    <div class="badges">
+      <div class="badge commission">
+        Open for Commissions
+      </div>
+      <div class="badge">
+        Building Digital Excellence
+      </div>
+    </div>
+  </div>
+</body>
+</html>
