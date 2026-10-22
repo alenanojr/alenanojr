@@ -17,7 +17,7 @@
 <a href="mailto:alenanojr@gmail.com" target="_blank">
   <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
 </a>
-<a href="PASTE_YOUR_PORTFOLIO_URL_HERE" target="_blank">
+<a href="https://alejr-portfolio.vercel.app/" target="_blank">
   <img src="https://img.shields.io/badge/My%20Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio"/>
 </a>
 
